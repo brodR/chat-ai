@@ -30,6 +30,8 @@ export const insertConversationSchema = createInsertSchema(conversations).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+}).extend({
+  model: z.string().default("gpt-5"),
 });
 
 export type InsertConversation = z.infer<typeof insertConversationSchema>;

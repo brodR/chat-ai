@@ -61,13 +61,13 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  private async getConversationFilePath(id: string): string {
+  private getConversationFilePath(id: string): string {
     return path.join(CONVERSATIONS_DIR, `${id}.json`);
   }
 
   private async loadConversationData(id: string): Promise<ConversationData | null> {
     try {
-      const filePath = await this.getConversationFilePath(id);
+      const filePath = this.getConversationFilePath(id);
       const data = await fs.readFile(filePath, "utf-8");
       const parsed = JSON.parse(data);
       
@@ -87,7 +87,7 @@ export class MemStorage implements IStorage {
 
   private async saveConversationData(id: string, data: ConversationData): Promise<void> {
     await ensureDataDir();
-    const filePath = await this.getConversationFilePath(id);
+    const filePath = this.getConversationFilePath(id);
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
   }
 
@@ -124,6 +124,7 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const now = new Date();
     const conversation: Conversation = {
+      userId: null,
       ...insertConversation,
       id,
       createdAt: now,
@@ -159,7 +160,7 @@ export class MemStorage implements IStorage {
 
   async deleteConversation(id: string): Promise<void> {
     try {
-      const filePath = await this.getConversationFilePath(id);
+      const filePath = this.getConversationFilePath(id);
       await fs.unlink(filePath);
     } catch (error) {
       console.error("Error deleting conversation:", error);
@@ -182,6 +183,7 @@ export class MemStorage implements IStorage {
       ...insertMessage,
       id,
       timestamp: new Date(),
+      files: insertMessage.files ? (insertMessage.files as unknown as typeof message.files) : null,
     };
 
     data.messages.push(message);

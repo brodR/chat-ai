@@ -25,11 +25,12 @@ function AppContent() {
   });
 
   const createConversationMutation = useMutation({
-    mutationFn: async () => {
-      return await apiRequest("POST", "/api/conversations", {
+    mutationFn: async (): Promise<Conversation> => {
+      const response = await apiRequest("POST", "/api/conversations", {
         title: "Новый диалог",
         model: currentModel,
       });
+      return await response.json();
     },
     onSuccess: (data: Conversation) => {
       queryClient.invalidateQueries({ queryKey: ["/api/conversations"] });
