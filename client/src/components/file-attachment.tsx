@@ -1,7 +1,7 @@
+import React from 'react';
 import { FileText, Image as ImageIcon, Video, Music, Download } from "lucide-react";
 import { FileAttachment as FileAttachmentType } from "@shared/schema";
-import { Button } from "@/components/ui/button";
-
+import { Button } from "../components/ui/button";
 interface FileAttachmentProps {
   file: FileAttachmentType;
 }
@@ -59,8 +59,19 @@ export function FileAttachment({ file }: FileAttachmentProps) {
         <p className="text-sm font-medium truncate">{file.name}</p>
         <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
       </div>
-      
-      <Button
+
+      <Button size="icon" variant="ghost" asChild className="flex-shrink-0">
+        <a
+          href={file.url}
+          download={file.name}
+          aria-label={`Скачать файл ${file.name}`}
+          data-testid={`button-download-${file.id}`}
+        >
+          <Download className="w-4 h-4" />
+        </a>
+      </Button>
+
+      {/* <Button
         size="icon"
         variant="ghost"
         asChild
@@ -69,7 +80,7 @@ export function FileAttachment({ file }: FileAttachmentProps) {
         <a href={file.url} download={file.name} data-testid={`button-download-${file.id}`}>
           <Download className="w-4 h-4" />
         </a>
-      </Button>
+      </Button> */}
     </div>
   );
 }

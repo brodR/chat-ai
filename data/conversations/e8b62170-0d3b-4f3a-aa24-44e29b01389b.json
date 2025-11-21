@@ -1,0 +1,44 @@
+{
+  "conversation": {
+    "id": "e8b62170-0d3b-4f3a-aa24-44e29b01389b",
+    "userId": "e26319a2-9d1d-42ff-854a-133faafcb13a",
+    "title": "Привет!)",
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "createdAt": "2025-11-20T08:14:59.442Z",
+    "updatedAt": "2025-11-20T08:16:20.997Z"
+  },
+  "messages": [
+    {
+      "id": "3a639f01-baf4-47a4-9f87-fb06cd31f8eb",
+      "conversationId": "e8b62170-0d3b-4f3a-aa24-44e29b01389b",
+      "role": "user",
+      "content": "Привет!)",
+      "files": null,
+      "timestamp": "2025-11-20T08:15:14.939Z"
+    },
+    {
+      "id": "5f820812-9944-4f43-b7eb-e0295a871e21",
+      "conversationId": "e8b62170-0d3b-4f3a-aa24-44e29b01389b",
+      "role": "assistant",
+      "content": "Привет!) Как дела? Что нового у тебя?",
+      "files": null,
+      "timestamp": "2025-11-20T08:15:17.463Z"
+    },
+    {
+      "id": "75c20b67-0fdf-43b2-9272-ff667dec492e",
+      "conversationId": "e8b62170-0d3b-4f3a-aa24-44e29b01389b",
+      "role": "user",
+      "content": "Да всё пока тестирую чат как работает. Пишу и исправляю ошибки.)",
+      "files": null,
+      "timestamp": "2025-11-20T08:16:17.110Z"
+    },
+    {
+      "id": "8c82cb5f-62d5-46d1-aebf-7794a10ed3d2",
+      "conversationId": "e8b62170-0d3b-4f3a-aa24-44e29b01389b",
+      "role": "assistant",
+      "content": "Отлично! Тестирование - это важный этап перед запуском любого проекта. Если тебе нужно проверить функционал или просто поболтать, я здесь, чтобы помочь. Не стесняйся задавать вопросы или просто общаться. Какие функции ты бы хотел проверить в первую очередь?",
+      "files": null,
+      "timestamp": "2025-11-20T08:16:20.997Z"
+    }
+  ]
+}

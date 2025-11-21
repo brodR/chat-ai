@@ -1,0 +1,44 @@
+{
+  "conversation": {
+    "id": "4c089b55-c3fb-4e0e-8ac0-57d32aadb4c0",
+    "userId": "e26319a2-9d1d-42ff-854a-133faafcb13a",
+    "title": "Проверяю чат! )\r\nВидны ли имена.",
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "createdAt": "2025-11-20T09:52:21.082Z",
+    "updatedAt": "2025-11-20T09:54:17.547Z"
+  },
+  "messages": [
+    {
+      "id": "f715de2e-5a50-41f7-89f0-822a21138183",
+      "conversationId": "4c089b55-c3fb-4e0e-8ac0-57d32aadb4c0",
+      "role": "user",
+      "content": "Проверяю чат! )\r\nВидны ли имена.",
+      "files": null,
+      "timestamp": "2025-11-20T09:53:22.953Z"
+    },
+    {
+      "id": "b80d224f-decd-4023-a2bf-a4d2194f7c78",
+      "conversationId": "4c089b55-c3fb-4e0e-8ac0-57d32aadb4c0",
+      "role": "assistant",
+      "content": "Да, я вижу ваше сообщение и могу отвечать на ваши вопросы. Похоже, что имена пользователей видны и я могу обращаться к вам напрямую. Как я могу вам помочь сегодня?",
+      "files": null,
+      "timestamp": "2025-11-20T09:53:25.528Z"
+    },
+    {
+      "id": "1626bdee-dde6-4393-9378-f998e2ab96ae",
+      "conversationId": "4c089b55-c3fb-4e0e-8ac0-57d32aadb4c0",
+      "role": "user",
+      "content": "Ты не видишь пока моего имени?",
+      "files": null,
+      "timestamp": "2025-11-20T09:54:15.876Z"
+    },
+    {
+      "id": "6eaeea93-b82e-49dd-9f78-959095b96928",
+      "conversationId": "4c089b55-c3fb-4e0e-8ac0-57d32aadb4c0",
+      "role": "assistant",
+      "content": "Вы правы, я не вижу вашего имени. Вы просто \"пользователь\" для меня сейчас. Если вы хотите, можете представиться и я смогу обращаться к вам по имени. Как вас зовут?",
+      "files": null,
+      "timestamp": "2025-11-20T09:54:17.547Z"
+    }
+  ]
+}

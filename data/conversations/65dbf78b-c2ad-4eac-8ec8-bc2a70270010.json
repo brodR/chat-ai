@@ -1,0 +1,11 @@
+{
+  "conversation": {
+    "id": "65dbf78b-c2ad-4eac-8ec8-bc2a70270010",
+    "userId": "cf453b62-b371-4fce-8f8e-a012c1343821",
+    "title": "Новый диалог",
+    "model": "tngtech/deepseek-r1t2-chimera:free",
+    "createdAt": "2025-11-21T19:48:59.088Z",
+    "updatedAt": "2025-11-21T19:48:59.088Z"
+  },
+  "messages": []
+}

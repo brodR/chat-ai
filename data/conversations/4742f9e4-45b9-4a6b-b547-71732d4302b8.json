@@ -1,0 +1,11 @@
+{
+  "conversation": {
+    "id": "4742f9e4-45b9-4a6b-b547-71732d4302b8",
+    "userId": "30f251ca-c9c4-4d95-899f-6a8f7b8b431e",
+    "title": "Новый диалог",
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "createdAt": "2025-11-20T16:03:07.209Z",
+    "updatedAt": "2025-11-20T16:03:07.209Z"
+  },
+  "messages": []
+}

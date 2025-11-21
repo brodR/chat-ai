@@ -1,7 +1,8 @@
+import React from 'react';
 import { Conversation } from "@shared/schema";
 import { MessageSquare, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "../components/ui/button";
+import { cn } from "../lib/utils";
 import { useState } from "react";
 
 interface ConversationItemProps {

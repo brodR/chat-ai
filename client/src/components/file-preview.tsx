@@ -1,5 +1,6 @@
+import React from 'react';
 import { X, FileText, Image as ImageIcon, Video, Music } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 interface FilePreviewProps {
   file: File;

@@ -1,6 +1,7 @@
+import React from "react";
 import { Sparkles, Image, FileText, Music } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
 
 interface EmptyStateProps {
   onPromptClick: (prompt: string) => void;

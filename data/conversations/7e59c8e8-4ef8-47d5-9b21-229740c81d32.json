@@ -1,0 +1,48 @@
+{
+  "conversation": {
+    "id": "7e59c8e8-4ef8-47d5-9b21-229740c81d32",
+    "userId": "e26319a2-9d1d-42ff-854a-133faafcb13a",
+    "title": "Привет! )",
+    "model": "deepseek/deepseek-chat-v3.1:free",
+    "createdAt": "2025-11-20T16:14:32.556Z",
+    "updatedAt": "2025-11-20T16:15:27.414Z"
+  },
+  "messages": [
+    {
+      "id": "6840fc42-be16-4d20-a064-43e44430f820",
+      "conversationId": "7e59c8e8-4ef8-47d5-9b21-229740c81d32",
+      "role": "user",
+      "content": "Привет! )",
+      "files": null,
+      "username": "Роман",
+      "timestamp": "2025-11-20T16:14:49.059Z"
+    },
+    {
+      "id": "0ac3543e-4366-497b-a511-93e5e69d18d5",
+      "conversationId": "7e59c8e8-4ef8-47d5-9b21-229740c81d32",
+      "role": "assistant",
+      "content": "Извините, произошла ошибка при обращении к ИИ. Попробуйте еще раз.",
+      "files": null,
+      "username": "Ассистент",
+      "timestamp": "2025-11-20T16:14:49.485Z"
+    },
+    {
+      "id": "cdf241b5-d698-4a91-b0e6-be37ab00c33b",
+      "conversationId": "7e59c8e8-4ef8-47d5-9b21-229740c81d32",
+      "role": "user",
+      "content": "Привет! )",
+      "files": null,
+      "username": "Роман",
+      "timestamp": "2025-11-20T16:15:27.169Z"
+    },
+    {
+      "id": "fb553985-1e57-4f26-a267-5de32a536943",
+      "conversationId": "7e59c8e8-4ef8-47d5-9b21-229740c81d32",
+      "role": "assistant",
+      "content": "Извините, произошла ошибка при обращении к ИИ. Попробуйте еще раз.",
+      "files": null,
+      "username": "Ассистент",
+      "timestamp": "2025-11-20T16:15:27.414Z"
+    }
+  ]
+}
