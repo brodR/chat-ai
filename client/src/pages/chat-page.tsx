@@ -9,6 +9,7 @@ import { ScrollArea } from "../components/ui/scroll-area";
 import { Skeleton } from "../components/ui/skeleton";
 import { apiRequest, queryClient } from "./../lib/queryClient";
 import { useToast } from "./../hooks/use-toast";
+import { Sparkles, Loader2 } from "lucide-react";
 
 // Правильно определи интерфейс
 interface ChatPageProps {
@@ -33,9 +34,9 @@ export function ChatPage({ conversationId, currentModel }: ChatPageProps) {
   // Функция для красивого отображения названия модели
   const getModelDisplayName = (modelId: string): string => {
     const modelMap: { [key: string]: string } = {
-      "tngtech/deepseek-r1t2-chimera:free": "DeepSeek r1t2",
-      "meta-llama/llama-3.3-70b-instruct:free": "Llama 3.3 70B (Free)",
-      "google/gemini-flash-1.5:free": "Gemini Flash 1.5 (Free)",
+      "tngtech/deepseek-r1t2-chimera:free": "DepS r1t2",
+      "meta-llama/llama-3.3-70b-instruct:free": "Lla 3.3",
+      "google/gemini-flash-1.5:free": "GemiFlash 1.5",
       "llama3.1:8b": "Llama 3.1 8B",
       "llama3.1:70b": "Llama 3.1 70B",
       "mistral-nemo": "Mistral Nemo",
@@ -88,25 +89,36 @@ export function ChatPage({ conversationId, currentModel }: ChatPageProps) {
   });
 
   useEffect(() => {
+    if (sendMessageMutation.isSuccess) {
+      queryClient.invalidateQueries({ 
+        queryKey: ["/api/conversations", conversationId, "messages"] 
+      });
+    }
+  }, [sendMessageMutation.isSuccess, conversationId, queryClient]);
+
+  useEffect(() => {
     if (autoScroll && scrollAreaRef.current) {
       const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
       if (scrollContainer) {
         scrollContainer.scrollTop = scrollContainer.scrollHeight;
       }
     }
-  }, [messages, autoScroll]);
+  }, [messages, autoScroll, sendMessageMutation.isPending]);
+
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleSendMessage = (content: string, files: File[]) => {
     if (!conversationId) {
-      toast({
-        title: "Выберите чат",
-        description: "Создайте новый чат в сайдбаре, чтобы начать общение",
-        variant: "destructive",
-      });
+      toast({ title: "Выберите чат", variant: "destructive" });
+        // title: "Выберите чат",
+        // description: "Создайте новый чат в сайдбаре, чтобы начать общение",
+        // variant: "destructive",
+      // });
       return;
     }
     if (!content.trim() && files.length === 0) return;
-    
+
+    setIsGenerating(true); // ← показываем что идёт генерация
     sendMessageMutation.mutate({ content, files });
     // НЕ блокируем интерфейс - поле ввода само сбросится
   };
@@ -153,6 +165,23 @@ export function ChatPage({ conversationId, currentModel }: ChatPageProps) {
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}
+            
+            {/* 👇 ДОБАВЬ ЭТОТ БЛОК - индикатор "Ассистент печатает..." */}
+            {sendMessageMutation.isPending && (
+              <div className="flex gap-3 px-4 py-3">
+                <div className="w-8 h-8 flex-shrink-0 bg-accent rounded-full flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-accent-foreground" />
+                </div>
+                <div className="flex flex-col gap-1 max-w-3xl">
+                  <div className="rounded-2xl px-4 py-3 bg-muted">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Ассистент печатает...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </ScrollArea>

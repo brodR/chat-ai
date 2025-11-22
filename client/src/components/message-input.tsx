@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef, KeyboardEvent } from "react";
+import { useState, useRef, KeyboardEvent, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
 import { Paperclip, Send, Loader2 } from "lucide-react";
@@ -17,6 +17,13 @@ export function MessageInput({ onSendMessage, disabled, isLoading }: MessageInpu
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  useEffect(() => {
+    // Авто-фокус когда isLoading становится false (ответ получен)
+    if (!isLoading) {
+      textareaRef.current?.focus();
+    }
+  }, [isLoading]);
+
   const handleSend = () => {
     if (!content.trim() && files.length === 0) return;
     // if (disabled || isLoading) return;
@@ -27,9 +34,9 @@ export function MessageInput({ onSendMessage, disabled, isLoading }: MessageInpu
     setFiles([]);
     
     // Возвращаем фокус на textarea
-    setTimeout(() => {
-      textareaRef.current?.focus();
-    }, 0);
+    // setTimeout(() => {
+    //   textareaRef.current?.focus();
+    // }, 0);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {

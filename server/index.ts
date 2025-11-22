@@ -16,7 +16,7 @@ const app = express();
 
 // ЗАМЕНИ CORS на это:
 app.use(cors({
-  origin: ["http://localhost:8080", "http://192.168.0.108:8080", "http://localhost:5173"],
+  origin: ["http://localhost:10000", "http://192.168.0.108:10000"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
@@ -97,7 +97,7 @@ app.use((req, res, next) => {
   }
 
   // Исправь порт и хост для доступа из интернета
-  const port = parseInt(process.env.PORT || '8080', 10);
+  const port = parseInt(process.env.PORT || '3000', 10);
   
   server.listen(port, "0.0.0.0", () => {
     log(`✅ Сервер запущен на порту ${port}`);

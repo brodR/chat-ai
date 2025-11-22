@@ -1,24 +1,14 @@
-// server/openai.ts
-import OpenAI from "openai";
-import { config } from "./config";
+// // server/openai.ts
+// import OpenAI from "openai";
 
-const openai = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPENROUTER_API_KEY || "",
-  defaultHeaders: {
-    "HTTP-Referer": "http://localhost:8080",
-    "X-Title": "Chat App",
-  },
-});
-
-interface AIResponseOptions {
-  model: string;
-  messages: Array<{
-    role: "user" | "assistant" | "system";
-    content: string;
-    username?: string;
-  }>;
-}
+// const openai = new OpenAI({
+//   baseURL: "https://openrouter.ai/api/v1",
+//   apiKey: process.env.OPENROUTER_API_KEY || "",
+//   defaultHeaders: {
+//     "HTTP-Referer": "http://localhost:3000",
+//     "X-Title": "Chat App",
+//   },
+// });
 
 // export async function generateAIResponse(
 //   conversationHistory: { role: "user" | "assistant"; content: string }[],
@@ -50,16 +40,240 @@ interface AIResponseOptions {
 //   }
 // }
 
-// Определяем провайдера по ID модели
+// export async function analyzeImage(base64Image: string, prompt: string): Promise<string> {
+//   return "Анализ изображений временно недоступен.";
+// }
+
+
+
+
+
+
+
+
+
+
+// import OpenAI from "openai";
+// // import { config } from "./config";
+
+// const openai = new OpenAI({
+//   baseURL: "https://openrouter.ai/api/v1",
+//   apiKey: process.env.OPENROUTER_API_KEY || "",
+//   defaultHeaders: {
+//     "HTTP-Referer": "http://localhost:10000",
+//     "X-Title": "Chat App",
+//   },
+
+// });
+
+
+// // Определяем провайдера по ID модели
+// function getProviderByModel(modelId: string): "openrouter" | "ollama" | "openai" {
+//   if (modelId.includes("ollama") || modelId.includes(":")) {
+//     return "ollama";
+//   }
+//   if (modelId.includes("openrouter") || modelId.includes("/")) {
+//     return "openrouter";
+//   }
+//   return "openrouter"; // по умолчанию
+// }
+
+// export async function generateAIResponse(
+//   conversationHistory: Array<{
+//     role: "user" | "assistant";
+//     content: string;
+//     username?: string;
+//   }>,
+//   model: string = "deepseek/deepseek-chat-v3.1:free"
+// ): Promise<string> {
+//   try {
+//     const provider = getProviderByModel(model);
+    
+//     switch (provider) {
+//       case "openrouter":
+//         return await generateOpenRouterResponse(conversationHistory, model);
+//       case "ollama":
+//         return await generateOllamaResponse(conversationHistory, model);
+//       default:
+//         return await generateOpenRouterResponse(conversationHistory, model);
+//     }
+//   } catch (error) {
+//     console.error("Error generating AI response:", error);
+//     return "Извините, произошла ошибка при генерации ответа.";
+//   }
+// }
+
+// // Функция для OpenRouter - используем OpenAI SDK
+// async function generateOpenRouterResponse(
+//   conversationHistory: Array<{
+//     role: "user" | "assistant";
+//     content: string;
+//     username?: string;
+//   }>,
+//   model: string
+// ): Promise<string> {
+//   try {
+//     const messages = conversationHistory.map(msg => ({
+//       role: msg.role,
+//       content: msg.username && msg.role === "user" 
+//         ? `[${msg.username}]: ${msg.content}`
+//         : msg.content
+//     }));
+
+//     const completion = await openai.chat.completions.create({
+//       model: model,
+//       messages: messages as any,
+//       max_tokens: 4000,
+//       temperature: 0.7,
+//     });
+
+//     return completion.choices[0]?.message?.content || "Нет ответа от модели";
+//   } catch (error) {
+//     console.error("OpenAI SDK error:", error);
+//     // Fallback на ручной fetch если SDK не работает
+//     return await generateOpenRouterResponseFallback(conversationHistory, model);
+//   }
+// }
+
+// // Fallback функция на ручной fetch
+// async function generateOpenRouterResponseFallback(
+//   conversationHistory: Array<{
+//     role: "user" | "assistant";
+//     content: string;
+//     username?: string;
+//   }>,
+//   model: string
+// ): Promise<string> {
+//   const apiKey = process.env.OPENROUTER_API_KEY;
+//   if (!apiKey) {
+//     throw new Error("OpenRouter API key not configured");
+//   }
+
+
+//   const messages = conversationHistory.map(msg => ({
+
+//     role: msg.role,
+//     content: msg.username && msg.role === "user" 
+//       ? `[${msg.username}]: ${msg.content}`
+//       : msg.content
+//   }));
+
+//   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+//     method: "POST",
+//     headers: {
+//       "Authorization": `Bearer ${apiKey}`,
+//       "Content-Type": "application/json",
+//       "HTTP-Referer": "http://localhost:10000",
+//       "X-Title": "Chat App"
+//     },
+//     body: JSON.stringify({
+//       model: model,
+//       messages: messages,
+//       max_tokens: 4000,
+//       temperature: 0.7,
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     const errorText = await response.text();
+//     console.error("OpenRouter API error:", errorText);
+//     throw new Error(`OpenRouter API error: ${response.status}`);
+//   }
+
+//   const data = await response.json();
+//   return data.choices[0]?.message?.content || "Нет ответа от модели";
+// }
+
+// // Функция для Ollama
+// async function generateOllamaResponse(
+//   conversationHistory: Array<{
+//     role: "user" | "assistant";
+//     content: string;
+//     username?: string;
+//   }>,
+//   model: string
+// ): Promise<string> {
+
+//   const ollamaModel = model.replace("ollama/", "").split(":")[0];
+  
+//   const response = await fetch("http://localhost:11434/api/generate", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       model: ollamaModel,
+//       prompt: conversationHistory[conversationHistory.length - 1]?.content || "",
+//       stream: false,
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     throw new Error(`Ollama API error: ${response.status}`);
+//   }
+
+//   const data = await response.json();
+//   return data.response || "Нет ответа от модели";
+// }
+
+// export async function analyzeImage(base64Image: string, prompt: string): Promise<string> {
+//   return "Анализ изображений временно недоступен.";
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // server/openai.ts
+import OpenAI from "openai";
+import { config } from "./config";
+
+const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY || "",
+  defaultHeaders: {
+    "HTTP-Referer": "http://localhost:3000",
+    "X-Title": "Chat App",
+  },
+});
+
+interface AIResponseOptions {
+  model: string;
+  messages: Array<{
+    role: "user" | "assistant" | "system";
+    content: string;
+    username?: string;
+  }>;
+}
+
 function getProviderByModel(modelId: string): "openrouter" | "ollama" | "openai" {
-  if (modelId.includes("ollama") || modelId.includes(":")) {
+  if (modelId.startsWith("ollama/")) {
     return "ollama";
   }
-  if (modelId.includes("openrouter") || modelId.includes("/")) {
+  if (modelId.includes("/") || modelId.includes("openrouter")) {
     return "openrouter";
   }
   return "openrouter"; // по умолчанию
 }
+
+// // Определяем провайдера по ID модели
+// function getProviderByModel(modelId: string): "openrouter" | "ollama" | "openai" {
+//   if (modelId.includes("ollama") || modelId.includes(":")) {
+//     return "ollama";
+//   }
+//   if (modelId.includes("openrouter") || modelId.includes("/")) {
+//     return "openrouter";
+//   }
+//   return "openrouter"; // по умолчанию
+// }
 
 export async function generateAIResponse(
   conversationHistory: Array<{
@@ -113,7 +327,7 @@ async function generateOpenRouterResponse(
     headers: {
       "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://your-app.com", // Замени на свой домен
+      "HTTP-Referer": "https://chat-ai-c5pi.onrender.com/", // Замени на свой домен
       "X-Title": "ChatAlis" // Замени на название своего приложения
     },
     body: JSON.stringify({

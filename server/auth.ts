@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
       username,
       password: password,
       tokensUsed: 0,        // ← добавь
-      tokensLimit: 1000,    // ← добавь
+      tokensLimit: 1000000,    // ← добавь
       plan: 'free' as const // ← добавь
     });
 
